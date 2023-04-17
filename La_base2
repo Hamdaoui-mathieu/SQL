@@ -1,0 +1,152 @@
+SELECT prenom, noregion
+FROM dept
+JOIN employe ON dept.nodept = employe.nodep
+
+----
+
+SELECT nodep AS 'num de dep',dept.nom AS 'nom de departement', employe.nom AS 'nom employé'
+FROM dept
+JOIN employe ON dept.nodept = employe.nodep
+
+----
+
+SELECT nodep AS 'num de dep',dept.nom AS 'nom de departement', employe.nom AS 'nom employé'
+FROM dept
+JOIN employe ON dept.nodept = employe.nodep
+WHERE dept.nom LIKE 'distribution'
+
+----
+
+SELECT employe.nom AS employe, employe.salaire, superieur.nom AS superieur, superieur.salaire
+FROM employe
+JOIN employe AS superieur ON employe.nosup = superieur.noemp
+WHERE employe.salaire > superieur.salaire
+
+----
+
+SELECT employe.nom, titre
+FROM employe
+WHERE titre IN
+(SELECT titre FROM employe WHERE nom= 'amartakaldire')
+
+----
+
+SELECT nom, salaire, nodep
+FROM employe
+WHERE salaire > ANY 
+	(SELECT salaire FROM employe WHERE nodep=31)
+
+----
+
+SELECT nom, salaire, nodep
+FROM employe
+WHERE salaire > All 
+	(SELECT salaire FROM employe WHERE nodep=31)
+
+----
+
+SELECT nom, titre
+FROM employe
+WHERE nodep = 31
+AND titre IN ( 
+	SELECT titre 
+	FROM employe
+	WHERE nodep = 32)
+
+----
+
+SELECT nom, titre
+FROM employe
+WHERE nodep = 31
+AND titre not IN ( 
+	SELECT titre 
+	FROM employe
+	WHERE nodep = 32)
+
+----
+
+SELECT nom, titre, salaire
+FROM employe
+WHERE titre
+IN ( 
+	SELECT titre 
+	FROM employe
+	WHERE nom = 'Fairent')
+AND salaire 
+IN (
+	SELECT salaire
+	FROM employe 
+	WHERE nom = 'Fairent')
+
+----
+
+SELECT nodept, dept.nom, employe.nom
+FROM dept
+LEFT JOIN employe ON  employe.nodep = dept.nodept
+ORDER BY nodept 
+
+--exos1--
+
+SELECT  titre,COUNT(employe.nom)
+FROM employe
+GROUP BY titre
+
+--exos2--
+
+SELECT noregion, nodep, AVG(salaire)
+FROM employe
+JOIN dept ON employe.nodep = dept.nodept
+GROUP BY noregion
+
+--exos3--
+
+SELECT count(nom), nodep
+FROM employe
+group BY nodep
+HAVING COUNT(*) >= 3
+
+--exos4--
+
+SELECT LEFT(nom, 1) AS 'initiale', COUNT(*) AS 'nombre'
+FROM employe
+GROUP BY initiale
+HAVING COUNT(*) >= 3
+
+--exos5--
+
+SELECT MAX(salaire) AS 'salaire_max', MIN(salaire) AS 'salaire_min', MAX(salaire)- MIN(salaire) AS écart_salaire
+FROM employe
+
+--exos6--
+
+SELECT DISTINCT titre
+FROM employe
+
+--exos7--
+
+SELECT DISTINCT titre, COUNT(*) 
+FROM employe
+GROUP BY titre
+
+--exos8--
+
+SELECT dept.nom, COUNT(noemp)
+FROM dept
+JOIN employe ON nodep = nodept
+GROUP BY nodep
+
+--exos9--
+
+SELECT titre, AVG(salaire)
+FROM employe
+WHERE salaire > (
+	SELECT AVG(salaire) 
+	FROM employe
+	WHERE titre = 'representant')
+GROUP BY titre
+ORDER BY AVG(salaire) asc
+
+--exos10--
+
+SELECT COUNT(salaire), COUNT(tauxcom)
+from employe
