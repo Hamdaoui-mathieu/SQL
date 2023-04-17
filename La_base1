@@ -1,0 +1,195 @@
+--exos1--
+
+SELECT * FROM employe
+
+--exos2--
+
+
+--exos3--
+1.
+SELECT nom, dateemb, nosup, nodep, salaire
+FROM employe
+
+2.
+SELECT nom as Employe, dateemb as Embauche, nosup as Superieur num, nodep as Departement, salaire
+FROM employe
+
+--exos4--
+
+SELECT nom, prenom, titre
+FROM employe
+
+--exos5--
+
+SELECT distinct titre
+FROM employe
+
+--exos6--
+
+SELECT nom, noemp, nodep 
+FROM employe 
+WHERE titre = secretaire
+
+--exos7--
+
+SELECT nom, nodep
+from employe
+where nodep > 40
+
+--exos8--
+
+SELECT employe.nom, employe.prenom 
+FROM employe
+ORDER BY employe.nom, employe.prenom
+
+--exos9--
+
+SELECT nom, salaire, nodep
+FROM employe
+WHERE nodep = 35
+AND salaire > 20000
+AND titre = 'représentant'
+
+--exos10--
+
+SELECT nom, titre, salaire
+FROM employe
+WHERE titre =  'président'
+OR titre= 'représentant'
+
+--exos11--
+
+SELECT nom, titre, nodep, salaire
+FROM employe
+WHERE nodep = 34
+and titre 
+IN ('représentant',  'secrétaire')
+
+
+--exos12--
+
+SELECT nom, titre, nodep, salaire
+FROM employe
+WHERE titre = 'secrétaire'
+AND nodep = 34
+OR titre = 'représentant'
+
+--exos13--
+
+SELECT nom, salaire
+FROM employe
+WHERE salaire > 20000
+AND salaire < 30000
+
+--exos14--
+
+???
+
+--exos15--
+
+SELECT nom
+FROM employe
+WHERE nom LIKE 'H%'
+
+
+--exos16--
+
+SELECT nom
+FROM employe
+WHERE nom LIKE '%n'
+
+--exos17--
+
+SELECT nom
+FROM employe
+WHERE nom LIKE '__u%'
+
+--exos18--
+
+SELECT salaire, nom
+FROM employe
+WHERE nodep = '41'
+ORDER BY salaire asc
+
+--exos19--
+
+SELECT salaire, nom
+FROM employe
+WHERE nodep = '41'
+ORDER BY salaire desc
+
+--exos20--
+
+SELECT titre, salaire, nom
+FROM employe
+WHERE nodep = '41'
+ORDER BY salaire DESC, titre asc
+
+--exos21--
+
+SELECT tauxcom, salaire, nom
+FROM employe
+ORDER BY tauxcom asc
+
+--exos22--
+
+SELECT nom, salaire, tauxcom
+FROM employe
+WHERE   tauxcom IS null
+
+--exos23--
+
+SELECT nom, salaire, tauxcom, titre
+FROM employe
+WHERE   tauxcom IS not null
+
+--exos24--
+
+SELECT nom, salaire, tauxcom, titre
+FROM employe
+WHERE   tauxcom <15
+
+--exos25--
+
+SELECT nom, salaire, tauxcom, titre
+FROM employe
+WHERE   tauxcom >15
+
+--exos26--
+
+SELECT nom, salaire, tauxcom, (salaire * tauxcom) AS commission
+FROM employe
+where tauxcom IS NOT null
+
+--exos27--
+
+SELECT nom, salaire, tauxcom, (salaire * tauxcom) AS commission
+FROM employe
+where tauxcom IS NOT NULL
+ORDER BY commission asc
+
+--exos28--
+
+SELECT CONCAT (nom, ' ', prenom) AS 'nom et prénom'
+FROM employe
+
+--exos29--
+
+SELECT SUBSTR(nom,1,5)
+FROM employe
+
+--exos30--
+
+SELECT nom, instr(nom, 'r') AS emplacement
+FROM employe
+
+--exos31--
+
+SELECT nom, UPPER (nom), LOWER (nom)
+FROM employe
+WHERE nom LIKE 'vrante'
+
+--exos32--
+
+SELECT nom, length (nom) AS taille_nom;
+FROM employe
