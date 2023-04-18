@@ -1,11 +1,15 @@
 --exos1--
+--Afficher toutes les informations concernant les employés.--
 
 SELECT * FROM employe
 
 --exos2--
-
+--Afficher toutes les informations concernant les départements.--
 
 --exos3--
+-- Afficher le nom, la date d'embauche, le numéro du supérieur, le
+numéro de département et le salaire de tous les employés.--
+
 1.
 SELECT nom, dateemb, nosup, nodep, salaire
 FROM employe
@@ -15,34 +19,45 @@ SELECT nom as Employe, dateemb as Embauche, nosup as Superieur num, nodep as Dep
 FROM employe
 
 --exos4--
+--Afficher le titre de tous les employés.--
 
 SELECT nom, prenom, titre
 FROM employe
 
 --exos5--
+--Afficher les différentes valeurs des titres des employés.--
 
 SELECT distinct titre
 FROM employe
 
 --exos6--
+--Afficher le nom, le numéro d'employé et le numéro du
+département des employés dont le titre est « Secrétaire ».--
 
 SELECT nom, noemp, nodep 
 FROM employe 
 WHERE titre = secretaire
 
 --exos7--
+--Afficher le nom et le numéro de département dont le numéro de
+département est supérieur à 40.--
 
 SELECT nom, nodep
 from employe
 where nodep > 40
 
 --exos8--
+--Afficher le nom et le prénom des employés dont le nom est
+alphabétiquement antérieur au prénom.--
 
 SELECT employe.nom, employe.prenom 
 FROM employe
 ORDER BY employe.nom, employe.prenom
 
 --exos9--
+--Afficher le nom, le salaire et le numéro du département des employés
+dont le titre est « Représentant », le numéro de département est 35 et
+le salaire est supérieur à 20000.--
 
 SELECT nom, salaire, nodep
 FROM employe
@@ -51,6 +66,8 @@ AND salaire > 20000
 AND titre = 'représentant'
 
 --exos10--
+--Afficher le nom, le titre et le salaire des employés dont le titre est
+« Représentant » ou dont le titre est « Président ».--
 
 SELECT nom, titre, salaire
 FROM employe
@@ -58,6 +75,9 @@ WHERE titre =  'président'
 OR titre= 'représentant'
 
 --exos11--
+--Afficher le nom, le titre, le numéro de département, le salaire des
+employés du département 34, dont le titre est « Représentant » ou
+« Secrétaire ».--
 
 SELECT nom, titre, nodep, salaire
 FROM employe
@@ -67,6 +87,9 @@ IN ('représentant',  'secrétaire')
 
 
 --exos12--
+--Afficher le nom, le titre, le numéro de département, le salaire des
+employés dont le titre est Représentant, ou dont le titre est Secrétaire
+dans le département numéro 34.--
 
 SELECT nom, titre, nodep, salaire
 FROM employe
@@ -75,17 +98,26 @@ AND nodep = 34
 OR titre = 'représentant'
 
 --exos13--
+--Afficher le nom, et le salaire des employés dont le salaire est compris
+entre 20000 et 30000.--
 
+1.
 SELECT nom, salaire
 FROM employe
 WHERE salaire > 20000
 AND salaire < 30000
+
+2.
+SELECT nom, salaire
+FROM employe
+WHERE salaire BETWEEN 20000 AND 30000
 
 --exos14--
 
 ???
 
 --exos15--
+--Afficher le nom des employés commençant par la lettre « H ».--
 
 SELECT nom
 FROM employe
@@ -93,18 +125,23 @@ WHERE nom LIKE 'H%'
 
 
 --exos16--
+--Afficher le nom des employés se terminant par la lettre « n ».--
 
 SELECT nom
 FROM employe
 WHERE nom LIKE '%n'
 
 --exos17--
+--Afficher le nom des employés contenant la lettre « u » en 3ème
+position.--
 
 SELECT nom
 FROM employe
 WHERE nom LIKE '__u%'
 
 --exos18--
+--Afficher le salaire et le nom des employés du service 41 classés par
+salaire croissant.--
 
 SELECT salaire, nom
 FROM employe
@@ -112,6 +149,8 @@ WHERE nodep = '41'
 ORDER BY salaire asc
 
 --exos19--
+--Afficher le salaire et le nom des employés du service 41 classés par
+salaire décroissant.--
 
 SELECT salaire, nom
 FROM employe
@@ -119,6 +158,8 @@ WHERE nodep = '41'
 ORDER BY salaire desc
 
 --exos20--
+--Afficher le titre, le salaire et le nom des employés classés par titre
+croissant et par salaire décroissant.--
 
 SELECT titre, salaire, nom
 FROM employe
@@ -126,42 +167,58 @@ WHERE nodep = '41'
 ORDER BY salaire DESC, titre asc
 
 --exos21--
+--Afficher le taux de commission, le salaire et le nom des employés
+classés par taux de commission croissante.--
 
 SELECT tauxcom, salaire, nom
 FROM employe
 ORDER BY tauxcom asc
 
 --exos22--
+--Afficher le nom, le salaire, le taux de commission et le titre des
+employés dont le taux de commission n'est pas renseigné.--
 
 SELECT nom, salaire, tauxcom
 FROM employe
 WHERE   tauxcom IS null
 
 --exos23--
+--Afficher le nom, le salaire, le taux de commission et le titre des
+employés dont le taux de commission est renseigné.--
 
 SELECT nom, salaire, tauxcom, titre
 FROM employe
 WHERE   tauxcom IS not null
 
 --exos24--
+--Afficher le nom, le salaire, le taux de commission, le titre des
+employés dont le taux de commission est inférieur à 15.--
 
 SELECT nom, salaire, tauxcom, titre
 FROM employe
 WHERE   tauxcom <15
 
 --exos25--
+-- Afficher le nom, le salaire, le taux de commission, le titre des
+employés dont le taux de commission est supérieur à 15.--
 
 SELECT nom, salaire, tauxcom, titre
 FROM employe
 WHERE   tauxcom >15
 
 --exos26--
+--Afficher le nom, le salaire, le taux de commission et la commission des
+employés dont le taux de commission n'est pas nul. (la commission
+est calculée en multipliant le salaire par le taux de commission)--
 
 SELECT nom, salaire, tauxcom, (salaire * tauxcom) AS commission
 FROM employe
 where tauxcom IS NOT null
 
 --exos27--
+-- Afficher le nom, le salaire, le taux de commission, la commission des
+employés dont le taux de commission n'est pas nul, classé par taux de
+commission croissant.--
 
 SELECT nom, salaire, tauxcom, (salaire * tauxcom) AS commission
 FROM employe
@@ -169,27 +226,35 @@ where tauxcom IS NOT NULL
 ORDER BY commission asc
 
 --exos28--
+--Afficher le nom et le prénom (concaténés) des employés. Renommer
+les colonnes--
 
 SELECT CONCAT (nom, ' ', prenom) AS 'nom et prénom'
 FROM employe
 
 --exos29--
+--Afficher les 5 premières lettres du nom des employés.--
 
 SELECT SUBSTR(nom,1,5)
 FROM employe
 
 --exos30--
+--Afficher le nom et le rang de la lettre « r » dans le nom des
+employés.--
 
 SELECT nom, instr(nom, 'r') AS emplacement
 FROM employe
 
 --exos31--
+-- Afficher le nom, le nom en majuscule et le nom en minuscule de
+l'employé dont le nom est Vrente.--
 
 SELECT nom, UPPER (nom), LOWER (nom)
 FROM employe
 WHERE nom LIKE 'vrante'
 
 --exos32--
+--Afficher le nom et le nombre de caractères du nom des employés.--
 
 SELECT nom, length (nom) AS taille_nom;
 FROM employe
